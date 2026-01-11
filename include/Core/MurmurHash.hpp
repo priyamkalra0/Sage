@@ -35,4 +35,9 @@ std::unordered_map<u32, std::string_view> const Hashes
     { 0xd2025694, "MapData.IconData.StampData.Layer*" },
 
     { 0x1d6189da, "Sequence_CurrentBanc*" },
+
+    /* caption.sav */
+
+    { 0x26f3523b, "LocationMarker" }, // string // type: value
+    { 0x63696a32, "PreviewImage*" } // byte[] // type: reference
 };
