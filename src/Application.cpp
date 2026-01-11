@@ -8,30 +8,42 @@ int main(int const argc, char const* argv[]) {
 
     /* Sample usage for `Sav.hpp` */
     /* progress.sav */
-    Sav progress_sav {"progress.sav"};
-    std::cout << progress_sav.get<u32>("PlayerStatus.MaxLife") << std::endl;
+    Sav progress_sav { "progress.sav" };
 
-    auto& rupees = progress_sav.get<u32>("PlayerStatus.CurrentRupee"); // get as reference
-    rupees = 99'999; // directly write to sav object's memory
-    std::cout << progress_sav.get<u32>("PlayerStatus.CurrentRupee") << std::endl; // 99'999
+    /* Query location */
+    auto [x, y, z] = progress_sav.get<vec3f>(Hash::PlayerStatus_SavePos);
+    std::cout << "Location: " << x << ", " << y << ", " << z << std::endl;
 
-    std::cout << progress_sav.array<u32>("Pouch.Weapon.ValidNum")[0] << std::endl;
-    std::cout << progress_sav.array<u32>("Pouch.Bow.ValidNum")[0] << std::endl;
+    /* Set heart container count */
+    auto& hearts = progress_sav.get<u32>(Hash::PlayerStatus_MaxLife);
+    hearts = 40 * 4; // directly writes to sav object's memory
 
-    auto [x, y, z] = progress_sav.get<vec3f>("PlayerStatus.SavePos");
-    std::cout << x << ", " << y << ", " << z << std::endl;
+    std::cout
+        << "Hearts set to "
+        << progress_sav.get<u32>(Hash::PlayerStatus_MaxLife) / 4
+        << std::endl;
 
-    std::cout << progress_sav.string("Sequence_CurrentBanc") << std::endl; // MainField
+    /* Set rupee amount */
+    auto& rupees = progress_sav.get<u32>(Hash::PlayerStatus_CurrentRupee); // get as reference
+    rupees = 99'999;
+
+    std::cout
+        << "Rupees set to "
+        << progress_sav.get<u32>(Hash::PlayerStatus_CurrentRupee)
+        << std::endl;
 
     progress_sav.dump("export.sav");
     /**/
 
     /* caption.sav */
-    Sav caption_sav {"caption.sav"};
-    std::cout << caption_sav.string("LocationMarker"); // MapArea_TamulPlateau
+    Sav caption_sav { "caption.sav" };
 
-    u32 const img_size = caption_sav.get<u32>("PreviewImage");
-    u8 const* img_buffer = caption_sav.array<u8>("PreviewImage");
+    /* Query map area */
+    std::cout << caption_sav.string(Hash::LocationMarker); // MapArea_TamulPlateau
+
+    /* Export save thumbnail (menu preview image) */
+    u32 const img_size = caption_sav.get<u32>(Hash::PreviewImage);
+    u8 const* img_buffer = caption_sav.array<u8>(Hash::PreviewImage);
 
     write_all_bytes("preview.jpg", img_buffer, img_size);
     /**/

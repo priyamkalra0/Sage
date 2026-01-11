@@ -11,25 +11,25 @@ but the `Sav.hpp` header can be included and used like a library as such:
     Sav progress_sav { "progress.sav" };
 
     /* Query location */
-    auto [x, y, z] = progress_sav.get<vec3f>("PlayerStatus.SavePos");
+    auto [x, y, z] = progress_sav.get<vec3f>(Hash::PlayerStatus_SavePos);
     std::cout << "Location: " << x << ", " << y << ", " << z << std::endl;
 
     /* Set heart container count */
-    auto& hearts = progress_sav.get<u32>("PlayerStatus.MaxLife"); // get as reference
+    auto& hearts = progress_sav.get<u32>(Hash::PlayerStatus_MaxLife);
     hearts = 40 * 4; // directly writes to sav object's memory
 
     std::cout
         << "Hearts set to "
-        << progress_sav.get<u32>("PlayerStatus.MaxLife") / 4
+        << progress_sav.get<u32>(Hash::PlayerStatus_MaxLife) / 4
         << std::endl;
 
     /* Set rupee amount */
-    auto& rupees = progress_sav.get<u32>("PlayerStatus.CurrentRupee");
+    auto& rupees = progress_sav.get<u32>(Hash::PlayerStatus_CurrentRupee); // get as reference
     rupees = 99'999;
 
     std::cout
         << "Rupees set to "
-        << progress_sav.get<u32>("PlayerStatus.CurrentRupee")
+        << progress_sav.get<u32>(Hash::PlayerStatus_CurrentRupee)
         << std::endl;
 
     progress_sav.dump("progress.sav");
@@ -39,11 +39,12 @@ but the `Sav.hpp` header can be included and used like a library as such:
     Sav caption_sav { "caption.sav" };
 
     /* Query map area */
-    std::cout << caption_sav.string("LocationMarker"); // MapArea_TamulPlateau
+    std::cout << caption_sav.string(Hash::LocationMarker); // MapArea_TamulPlateau
 
     /* Export save thumbnail (menu preview image) */
-    u32 const img_size = caption_sav.get<u32>("PreviewImage");
-    u8 const* img_buffer = caption_sav.array<u8>("PreviewImage");
+    u32 const img_size = caption_sav.get<u32>(Hash::PreviewImage);
+    u8 const* img_buffer = caption_sav.array<u8>(Hash::PreviewImage);
+
     write_all_bytes("preview.jpg", img_buffer, img_size);
     /**/
 ```

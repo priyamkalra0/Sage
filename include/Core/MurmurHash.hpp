@@ -1,43 +1,75 @@
 #pragma once
 
 #include <unordered_map>
-#include <string_view>
 #include "Types.hpp"
 
 /*
  * Pre-computed Murmur3 hashes for the interesting variables in the .sav files
  * See: https://github.com/marcrobledo/savegame-editors/blob/b65dc1ecf655ba4f5f8bb74d4a7d402fc375fbf1/zelda-totk/zelda-totk.js#L28
  */
-std::unordered_map<u32, std::string_view> const Hashes
+
+enum class Hash : u32
 {
     /* progress.sav */
 
     // Capacities
-    { 0xfbe01da1, "PlayerStatus.MaxLife" }, // i32 // type: value
-    { 0xf9212c74, "PlayerStatus.MaxStamina"  }, // float // type: value
-    { 0xd7a3f6ba, "Pouch.Weapon.ValidNum*" }, // i32[] // type: reference
-    { 0xc61785c2, "Pouch.Bow.ValidNum*" }, // i32[] // type: reference
-    { 0x05271e7d, "Pouch.Shield.ValidNum*" }, // i32[] // type: reference
+    PlayerStatus_MaxLife = 0xfbe01da1, // i32
+    PlayerStatus_MaxStamina = 0xf9212c74, // float
+    Pouch_Weapon_ValidNum = 0xd7a3f6ba, // i32[]
+    Pouch_Bow_ValidNum = 0xc61785c2, // i32[]
+    Pouch_Shield_ValidNum = 0x05271e7d, // i32[]
 
     // Player Coordinates
-    { 0xc884818d, "PlayerStatus.SavePos*" }, // vec3f // type: reference
+    PlayerStatus_SavePos = 0xc884818d, // vec3f*
 
     // Current Statistics
-    { 0xa77921d7, "PlayerStatus.CurrentRupee" }, // i32 // type: value
-    { 0x31ab5580, "PlayerStatus.Life" },  // i32 // type: value
-    { 0xe573f564, "Playtime" }, // i32 // type: value
-    { 0xafd01d68, "PlayerStatus.MaxEnergy" }, // float // type: value
-    { 0x15ec5858, "HorseInnMemberPoint" }, // i32 // type: value
+    PlayerStatus_CurrentRupee = 0xa77921d7, // i32
+    PlayerStatus_Life = 0x31ab5580, // i32
+    Playtime = 0xe573f564, // i32
+    PlayerStatus_MaxEnergy = 0xafd01d68, // float
+    HorseInnMemberPoint = 0x15ec5858, // i32
 
     // Map data
-    { 0x14d7f4c4, "MapData.IconData.StampData.Type*" },
-    { 0xf24fc2e7, "MapData.IconData.StampData.Pos*" },
-    { 0xd2025694, "MapData.IconData.StampData.Layer*" },
+    MapData_IconData_StampData_Type = 0x14d7f4c4,
+    MapData_IconData_StampData_Pos = 0xf24fc2e7,
+    MapData_IconData_StampData_Layer = 0xd2025694,
 
-    { 0x1d6189da, "Sequence_CurrentBanc*" },
+    Sequence_CurrentBanc = 0x1d6189da, // string*
 
     /* caption.sav */
 
-    { 0x26f3523b, "LocationMarker" }, // string // type: value
-    { 0x63696a32, "PreviewImage*" } // byte[] // type: reference
+    LocationMarker = 0x26f3523b, // string
+    PreviewImage = 0x63696a32 // byte[]
+};
+
+enum class HashType : bool
+{
+    Value,
+    Reference
+};
+
+inline std::unordered_map<Hash, HashType> const Hashes
+{
+    { Hash::PlayerStatus_MaxLife, HashType::Value },
+    { Hash::PlayerStatus_MaxStamina, HashType::Value },
+    { Hash::Pouch_Weapon_ValidNum, HashType::Reference },
+    { Hash::Pouch_Bow_ValidNum, HashType::Reference },
+    { Hash::Pouch_Shield_ValidNum, HashType::Reference },
+
+    { Hash::PlayerStatus_SavePos, HashType::Reference },
+
+    { Hash::PlayerStatus_CurrentRupee, HashType::Value },
+    { Hash::PlayerStatus_Life, HashType::Value },
+    { Hash::Playtime, HashType::Value },
+    { Hash::PlayerStatus_MaxEnergy, HashType::Value },
+    { Hash::HorseInnMemberPoint, HashType::Value },
+
+    { Hash::MapData_IconData_StampData_Type, HashType::Reference },
+    { Hash::MapData_IconData_StampData_Pos, HashType::Reference },
+    { Hash::MapData_IconData_StampData_Layer, HashType::Reference },
+
+    { Hash::Sequence_CurrentBanc, HashType::Reference },
+
+    { Hash::LocationMarker, HashType::Value },
+    { Hash::PreviewImage, HashType::Reference }
 };
