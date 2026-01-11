@@ -15,4 +15,7 @@ int main(int const argc, char const* argv[]) {
 
     std::cout << s.get_array<u32>("Pouch.Weapon.ValidNum")[0] << std::endl;
     std::cout << s.get_array<u32>("Pouch.Bow.ValidNum")[0] << std::endl;
+
+    auto [x, y, z] = s.get<vec3f>("PlayerStatus.SavePos");
+    std::cout << x << ", " << y << ", " << z << std::endl;
 }

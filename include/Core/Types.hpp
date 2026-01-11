@@ -10,6 +10,5 @@ using i8 = std::int8_t;
 using i16 = std::int16_t;
 using i32 = std::int32_t;
 
-//TODO
-class Vector2;
-class Vector3;
+struct vec2f { float x, y; };
+struct vec3f { float x, y, z; };
