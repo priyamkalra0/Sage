@@ -29,5 +29,9 @@ void Sav::populate_offsets(std::unordered_map<std::string_view, u32>& out)
         } else { // is value
             out[name] = value_offset;
         }
+
+        /* Some offsets need to be manually shifted */
+        /* i.e I do not know a better way to do this */
+        if (name == "LocationMarker") out[name] += 0x30;
     }
 }
