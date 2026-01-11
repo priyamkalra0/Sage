@@ -18,6 +18,23 @@ public:
         return get<T>(m_offsets.at(name));
     }
 
+    /* Get array by name (uses cached offset) */
+    template <typename T>
+    T* get_array(std::string_view const& name)
+    {
+        return get_array<T>(m_offsets.at(name));
+    }
+
+    /* Get array at any offset */
+    template <typename T>
+    T* get_array(u32 const offset)
+    {
+        return get_address<T>(
+            offset
+            + sizeof(u32) // The first integer is the size of the array
+        );
+    }
+
     /* Get reference to value at any offset */
     template <typename T>
     T& get(u32 const offset)

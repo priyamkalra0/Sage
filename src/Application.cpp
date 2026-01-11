@@ -12,4 +12,7 @@ int main(int const argc, char const* argv[]) {
     rupees = 99'999; // directly write to sav object's memory
 
     std::cout << s.get<u32>("PlayerStatus.CurrentRupee") << std::endl; // 99'999
+
+    std::cout << s.get_array<u32>("Pouch.Weapon.ValidNum")[0] << std::endl;
+    std::cout << s.get_array<u32>("Pouch.Bow.ValidNum")[0] << std::endl;
 }
