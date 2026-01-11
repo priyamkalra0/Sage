@@ -1,6 +1,6 @@
 # Sage
 
-Simple tool for parsing and patching savegame files for TLoZ: Tears of the Kingdom written in C++17.  
+Simple tool for parsing and patching savegame files for TLoZ: Tears of the Kingdom.  
 Based on this amazing [savegame editor](https://www.marcrobledo.com/savegame-editors/zelda-totk) by [Marc Robeldo](https://www.marcrobledo.com/).
 
 ## Usage
