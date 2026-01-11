@@ -6,7 +6,8 @@ int main(int const argc, char const* argv[]) {
     // if (argc != 2) return 1;
     // Sav s { argv[1] };
 
-    /**/
+    /* Sample usage for `Sav.hpp` */
+    /* progress.sav */
     Sav progress_sav {"progress.sav"};
     std::cout << progress_sav.get<u32>("PlayerStatus.MaxLife") << std::endl;
 
@@ -21,9 +22,11 @@ int main(int const argc, char const* argv[]) {
     std::cout << x << ", " << y << ", " << z << std::endl;
 
     std::cout << progress_sav.string("Sequence_CurrentBanc") << std::endl; // MainField
+
+    progress_sav.dump("export.sav");
     /**/
 
-    /**/
+    /* caption.sav */
     Sav caption_sav {"caption.sav"};
     std::cout << caption_sav.string("LocationMarker"); // MapArea_TamulPlateau
 

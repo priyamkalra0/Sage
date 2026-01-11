@@ -11,10 +11,16 @@
 class Sav
 {
 public:
-    explicit Sav(std::string const& path) {
+    explicit Sav(std::string const& path)
+    {
         read_all_bytes(path, m_data);
         populate_offsets(m_offsets);
     };
+
+    void dump(std::string const& path) const
+    {
+        write_all_bytes(path, m_data);
+    }
 
     /* Get reference to value by name (uses cached offset) */
     template <typename T>
@@ -66,7 +72,8 @@ private:
         return reinterpret_cast<T*>(&m_data[0] + offset);
     }
 
-    void populate_offsets(std::unordered_map<std::string_view, u32>& out) {
+    void populate_offsets(std::unordered_map<std::string_view, u32>& out)
+    {
         for (u32 offset = 0x00; offset < m_data.size(); offset += 0x08)
         {
             u32 hash = get<u32>(offset);
