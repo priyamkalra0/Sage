@@ -13,8 +13,8 @@ int main(int const argc, char const* argv[]) {
 
     std::cout << progress_sav.get<u32>("PlayerStatus.CurrentRupee") << std::endl; // 99'999
 
-    std::cout << progress_sav.get_array<u32>("Pouch.Weapon.ValidNum")[0] << std::endl;
-    std::cout << progress_sav.get_array<u32>("Pouch.Bow.ValidNum")[0] << std::endl;
+    std::cout << progress_sav.array<u32>("Pouch.Weapon.ValidNum")[0] << std::endl;
+    std::cout << progress_sav.array<u32>("Pouch.Bow.ValidNum")[0] << std::endl;
 
     auto [x, y, z] = progress_sav.get<vec3f>("PlayerStatus.SavePos");
     std::cout << x << ", " << y << ", " << z << std::endl;

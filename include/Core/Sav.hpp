@@ -20,9 +20,9 @@ public:
 
     /* Get array by name (uses cached offset) */
     template <typename T>
-    T* get_array(std::string_view const& name)
+    T* array(std::string_view const& name)
     {
-        return get_array<T>(m_offsets.at(name));
+        return array<T>(m_offsets.at(name));
     }
 
     /* Get a view to a string by name (uses cached offset) */
@@ -33,7 +33,7 @@ public:
 
     /* Get array at any offset */
     template <typename T>
-    T* get_array(u32 const offset)
+    T* array(u32 const offset)
     {
         return get_address<T>(
             offset
