@@ -25,6 +25,12 @@ public:
         return get_array<T>(m_offsets.at(name));
     }
 
+    /* Get a view to a string by name (uses cached offset) */
+    std::string_view string(std::string_view const& name)
+    {
+        return string(m_offsets.at(name));
+    }
+
     /* Get array at any offset */
     template <typename T>
     T* get_array(u32 const offset)
@@ -40,6 +46,12 @@ public:
     T& get(u32 const offset)
     {
         return *get_address<T>(offset);
+    }
+
+    /* Get a view to a string at any offset (uses cached offset) */
+    std::string_view string(u32 const offset)
+    {
+        return { get_address<char>(offset) };
     }
 
 private:
