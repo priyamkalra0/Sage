@@ -1,5 +1,6 @@
 #pragma once
 
+#include <span>
 #include <string>
 #include <vector>
 #include <string_view>
@@ -31,7 +32,7 @@ public:
 
     /* Get array by hash (uses cached offset) */
     template <typename T>
-    T* array(Hash const& hash)
+    std::span<T> array(Hash const& hash)
     {
         return array<T>(m_offsets.at(hash));
     }
@@ -51,12 +52,11 @@ public:
 
     /* Get array at any offset */
     template <typename T>
-    T* array(u32 const offset)
+    std::span<T> array(u32 const offset)
     {
-        return get_address<T>(
-            offset
-            + sizeof(u32) // The first integer is the size of the array
-        );
+        auto const size = get<u32>(offset);
+        T* data = get_address<T>(offset + sizeof(u32));
+        return {data, size};
     }
 
     /* Get a view to a string at any offset */
@@ -90,7 +90,6 @@ private:
                 value_offset = get<u32>(value_offset);
 
             out[hash] = value_offset;
-
 
             /* Some offsets need to be manually shifted */
             /* i.e I do not know a better way to do this */

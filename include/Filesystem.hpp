@@ -28,7 +28,7 @@ inline void write_all_bytes(const std::string& path, unsigned char const* data, 
     stream.close();
 }
 
-inline void write_all_bytes(std::string const& path, std::vector<unsigned char> const& data)
+inline void write_all_bytes(std::string const& path, std::span<unsigned char const> const& data)
 {
     write_all_bytes(path, data.data(), data.size());
 }

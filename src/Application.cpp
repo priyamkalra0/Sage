@@ -20,7 +20,7 @@ int main(int const argc, char const* argv[]) {
 
     std::cout
         << "Hearts set to "
-        << progress_sav.get<u32>(Hash::PlayerStatus_MaxLife) / 4
+        << hearts / 4
         << std::endl;
 
     /* Set rupee amount */
@@ -29,7 +29,16 @@ int main(int const argc, char const* argv[]) {
 
     std::cout
         << "Rupees set to "
-        << progress_sav.get<u32>(Hash::PlayerStatus_CurrentRupee)
+        << rupees
+        << std::endl;
+
+    /* Set weapon capacity */
+    auto& weapon_capacity = progress_sav.array<u32>(Hash::Pouch_Weapon_ValidNum)[0];
+    weapon_capacity = 20;
+
+    std::cout
+        << "Weapon capacity set to "
+        << weapon_capacity
         << std::endl;
 
     progress_sav.dump("export.sav");
@@ -42,9 +51,8 @@ int main(int const argc, char const* argv[]) {
     std::cout << caption_sav.string(Hash::LocationMarker); // MapArea_TamulPlateau
 
     /* Export save thumbnail (menu preview image) */
-    u32 const img_size = caption_sav.get<u32>(Hash::PreviewImage);
-    u8 const* img_buffer = caption_sav.array<u8>(Hash::PreviewImage);
+    std::span<u8 const> image = caption_sav.array<u8>(Hash::PreviewImage);
 
-    write_all_bytes("preview.jpg", img_buffer, img_size);
+    write_all_bytes("preview.jpg", image);
     /**/
 }
