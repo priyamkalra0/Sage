@@ -6,5 +6,5 @@ int main(int const argc, char const* argv[]) {
     // Sav s { argv[1] };
 
     Sav s {"progress.sav"};
-    std::cout << s.read<u32>(170564) << std::endl;
+    std::cout << s.read<u32>("PlayerStatus.MaxLife") << std::endl;
 }
