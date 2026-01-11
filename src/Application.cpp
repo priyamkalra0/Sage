@@ -6,5 +6,10 @@ int main(int const argc, char const* argv[]) {
     // Sav s { argv[1] };
 
     Sav s {"progress.sav"};
-    std::cout << s.read<u32>("PlayerStatus.MaxLife") << std::endl;
+    std::cout << s.get<u32>("PlayerStatus.MaxLife") << std::endl;
+
+    auto& rupees = s.get<u32>("PlayerStatus.CurrentRupee"); // get as reference
+    rupees = 99'999; // directly write to sav object's memory
+
+    std::cout << s.get<u32>("PlayerStatus.CurrentRupee") << std::endl; // 99'999
 }

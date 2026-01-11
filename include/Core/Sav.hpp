@@ -11,16 +11,16 @@ class Sav
 public:
     explicit Sav(std::string const& path);
 
-    /* Read value from cached offset */
+    /* Get reference to value by name (uses cached offset) */
     template <typename T>
-    T read(std::string_view const& name)
+    T& get(std::string_view const& name)
     {
-        return read<T>(m_offsets.at(name));
+        return get<T>(m_offsets.at(name));
     }
 
-    /* Read value from any offset */
+    /* Get reference to value at any offset */
     template <typename T>
-    T read(u32 const offset)
+    T& get(u32 const offset)
     {
         return *get_address<T>(offset);
     }
