@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Core/Sav.hpp"
+#include "Filesystem.hpp"
 
 int main(int const argc, char const* argv[]) {
     // if (argc != 2) return 1;
@@ -25,5 +26,10 @@ int main(int const argc, char const* argv[]) {
     /**/
     Sav caption_sav {"caption.sav"};
     std::cout << caption_sav.string("LocationMarker"); // MapArea_TamulPlateau
+
+    u32 const img_size = caption_sav.get<u32>("PreviewImage");
+    u8 const* img_buffer = caption_sav.array<u8>("PreviewImage");
+
+    write_all_bytes("preview.jpg", img_buffer, img_size);
     /**/
 }
