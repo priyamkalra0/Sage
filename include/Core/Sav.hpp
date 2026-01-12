@@ -25,34 +25,34 @@ public:
 
     /* Get reference to value by hash (uses cached offset) */
     template <typename T>
-    T& get(Hash const& hash)
+    T& get(Hash const hash)
     {
         return get<T>(m_offsets.at(hash));
     }
 
     /* Set value by hash (uses cached offset) */
     template <typename T>
-    void set(Hash const& hash, T const& v)
+    void set(Hash const hash, T const& v)
     {
         set<T>(m_offsets.at(hash), v);
     }
 
     /* Get array by hash (uses cached offset) */
     template <typename T>
-    std::span<T> array(Hash const& hash)
+    std::span<T> array(Hash const hash)
     {
         return array<T>(m_offsets.at(hash));
     }
 
     /* Get a view to a string by hash (uses cached offset) */
-    std::string_view string(Hash const& hash)
+    std::string_view string(Hash const hash)
     {
         return string(m_offsets.at(hash));
     }
 
     /* Test a value by hash (uses cached offset) */
     template <typename T>
-    bool test(Hash const& hash, T const& v)
+    bool test(Hash const hash, T const& v)
     {
         return test<T>(m_offsets.at(hash), v);
     }
