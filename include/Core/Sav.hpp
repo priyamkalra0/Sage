@@ -128,10 +128,6 @@ private:
             auto hash = get<Hash>(offset);
             u32 value_offset = offset + sizeof(u32);
 
-            /* Hashtable ends at MetaData.SaveTypeHash
-             * See: https://github.com/marcrobledo/savegame-editors/blob/b65dc1ecf655ba4f5f8bb74d4a7d402fc375fbf1/zelda-totk/zelda-totk.variables.js#L757
-             */
-            if (hash == Hash::MetaData_SaveTypeHash) break;
             if (!Hashes.contains(hash)) continue;
 
             auto const type = Hashes.at(hash);
@@ -139,6 +135,11 @@ private:
                 value_offset = get<u32>(value_offset);
 
             out[hash] = value_offset;
+
+            /* Hashtable ends at MetaData.SaveTypeHash
+             * See: https://github.com/marcrobledo/savegame-editors/blob/b65dc1ecf655ba4f5f8bb74d4a7d402fc375fbf1/zelda-totk/zelda-totk.variables.js#L757
+             */
+            if (hash == Hash::MetaData_SaveTypeHash) break;
         }
     };
 
