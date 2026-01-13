@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include "Filesystem.hpp"
 #include "Hash.hpp"
+#include "HashArray.hpp"
 #include "Types.hpp"
 
 class Sav
@@ -15,6 +16,7 @@ public:
     explicit Sav(std::string const& path)
     {
         read_all_bytes(path, m_data);
+        HashArray::load_all();
         populate_offsets(m_offsets);
     };
 
@@ -37,6 +39,13 @@ public:
         set<T>(m_offsets.at(hash), v);
     }
 
+    /* Set multiple values using hash array (uses cached offsets) */
+    template <typename T>
+    void set(HashArray_t const& hashes, T const& v)
+    {
+        for (auto const h : hashes) set<T>(h, v);
+    }
+
     /* Get array by hash (uses cached offset) */
     template <typename T>
     std::span<T> array(Hash const hash)
@@ -55,6 +64,18 @@ public:
     bool test(Hash const hash, T const& v)
     {
         return test<T>(m_offsets.at(hash), v);
+    }
+
+    /* Test multiple values using hash array (uses cached offsets)
+     * returns the number of matches */
+    template <typename T>
+    u32 test(HashArray_t const& hashes, T const& v)
+    {
+        u32 r = 0;
+        for (auto const h : hashes)
+            r += test(h, v);
+
+        return r;
     }
 
     /* Get reference to value at any offset */
