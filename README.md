@@ -51,7 +51,7 @@ but the `Sav.hpp` header can be included and used like a library as such:
     std::cout << caption_sav.string(Hash::LocationMarker); // MapArea_TamulPlateau
 
     /* Export save thumbnail (menu preview image) */
-    std::span<u8 const> image = caption_sav.array<u8>(Hash::PreviewImage);
+    std::span<u8 const> image = caption_sav.array<u8>(Hash::CaptionData_ScreenShot);
 
     write_all_bytes("preview.jpg", image);
     /**/

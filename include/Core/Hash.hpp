@@ -42,7 +42,7 @@ enum class Hash : u32
 
     /* caption.sav */
     LocationMarker = 0x26f3523b, // string
-    PreviewImage = 0x63696a32 // byte[]
+    CaptionData_ScreenShot = murmurhash3::hash("CaptionData.ScreenShot") // byte[]
 };
 
 enum class HashType : bool
@@ -74,5 +74,5 @@ inline std::unordered_map<Hash, HashType> Hashes
     { Hash::Sequence_CurrentBanc, HashType::Reference },
 
     { Hash::LocationMarker, HashType::Value },
-    { Hash::PreviewImage, HashType::Reference }
+    { Hash::CaptionData_ScreenShot, HashType::Reference }
 };
