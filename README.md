@@ -1,7 +1,9 @@
 # Sage
 
-Simple tool for parsing and patching savegame files for TLoZ: Tears of the Kingdom.  
-Based on this amazing [savegame editor](https://www.marcrobledo.com/savegame-editors/zelda-totk) by [Marc Robeldo](https://www.marcrobledo.com/).
+Simple tool for parsing and patching savegame files for TLoZ: Tears of the Kingdom.
+
+## Credits
+This tool is based on [this](https://www.marcrobledo.com/savegame-editors/zelda-totk) amazing savegame editor by [Marc Robeldo](https://www.marcrobledo.com/) and extensive game data gathered by [MrCheeze](https://github.com/MrCheeze/totk-tools) and [McSpazzy](https://github.com/McSpazzy/totk-gamedata).
 
 ## Usage
 At this stage, no user interface has been implemented;  
