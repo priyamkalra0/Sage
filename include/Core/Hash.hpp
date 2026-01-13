@@ -35,9 +35,9 @@ enum class Hash : u32
     HorseInnMemberPoint = murmurhash3::hash("HorseInnMemberPoint"), // u32
 
     // Map Data
-    MapData_IconData_StampData_Type = murmurhash3::hash("MapData.IconData.StampData.Type"),
-    MapData_IconData_StampData_Pos = murmurhash3::hash("MapData.IconData.StampData.Pos"),
-    MapData_IconData_StampData_Layer = murmurhash3::hash("MapData.IconData.StampData.Layer"),
+    MapData_IconData_StampData_Type = murmurhash3::hash("MapData.IconData.StampData.Type"), // enum
+    MapData_IconData_StampData_Pos = murmurhash3::hash("MapData.IconData.StampData.Pos"), // enum
+    MapData_IconData_StampData_Layer = murmurhash3::hash("MapData.IconData.StampData.Layer"), // enum
 
     // Other
     Sequence_CurrentBanc = murmurhash3::hash("Sequence.CurrentBanc"), // string*
