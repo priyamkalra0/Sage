@@ -1,5 +1,8 @@
 #include <iostream>
 #include "Core/Sav.hpp"
+#include "Core/Enum.hpp"
+#include "Core/Hash.hpp"
+#include "Core/HashArray.hpp"
 #include "Filesystem.hpp"
 
 int main(int const argc, char const* argv[]) {
@@ -40,6 +43,16 @@ int main(int const argc, char const* argv[]) {
         << "Weapon capacity set to "
         << weapon_capacity
         << std::endl;
+
+    /* Query cleared shrine count */
+    auto query_shrines = [&sav = progress_sav]() {
+        return sav.test(HashArray::DungeonState, Enum::DungeonState::Clear);
+    };
+    std::cout << "Shrines cleared: " << query_shrines(); // 50
+
+    /* Set all shrines as cleared */
+    progress_sav.set(HashArray::DungeonState, Enum::DungeonState::Clear);
+    std::cout << " -> " << query_shrines() << std::endl; // 152
 
     progress_sav.dump("export.sav");
     /**/

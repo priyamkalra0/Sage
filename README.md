@@ -41,6 +41,16 @@ but the `Sav.hpp` header can be included and used like a library as such:
         << weapon_capacity
         << std::endl;
 
+    /* Query cleared shrine count */
+    auto query_shrines = [&sav = progress_sav]() {
+        return sav.test(HashArray::DungeonState, Enum::DungeonState::Clear);
+    };
+    std::cout << "Shrines cleared: " << query_shrines(); // 50
+
+    /* Set all shrines as cleared */
+    progress_sav.set(HashArray::DungeonState, Enum::DungeonState::Clear);
+    std::cout << " -> " << query_shrines() << std::endl; // 152
+
     progress_sav.dump("progress.sav");
     /**/
 
