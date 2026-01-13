@@ -47,9 +47,12 @@ but the `Sav.hpp` header can be included and used like a library as such:
     /* caption.sav */
     Sav caption_sav { "caption.sav" };
 
-    /* Query map area */
-    std::cout << caption_sav.string(Hash::LocationMarker); // MapArea_TamulPlateau
-
+    /* Query map area, it is found 48 bytes
+     * after Metadata.SaveTypeHash
+     */
+    std::string_view const map_area = &caption_sav.get<char>(Hash::CaptionData_SaveTypeHash) + 48;
+    std::cout << map_area; // MapArea_TamulPlateau
+    
     /* Export save thumbnail (menu preview image) */
     std::span<u8 const> image = caption_sav.array<u8>(Hash::CaptionData_ScreenShot);
 
