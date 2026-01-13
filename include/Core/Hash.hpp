@@ -15,6 +15,7 @@
 enum class Hash : u32
 {
     /* progress.sav */
+    MetaData_SaveTypeHash = 0xa3db7114, // unknown
 
     // Capacities
     PlayerStatus_MaxLife = murmurhash3::hash("PlayerStatus.MaxLife"), // i32
@@ -41,7 +42,7 @@ enum class Hash : u32
     Sequence_CurrentBanc = murmurhash3::hash("Sequence.CurrentBanc"), // string*
 
     /* caption.sav */
-    LocationMarker = 0x26f3523b, // string
+    CaptionData_SaveTypeHash = 0x26f3523b, // unknown
     CaptionData_ScreenShot = murmurhash3::hash("CaptionData.ScreenShot") // byte[]
 };
 
@@ -73,6 +74,6 @@ inline std::unordered_map<Hash, HashType> Hashes
 
     { Hash::Sequence_CurrentBanc, HashType::Reference },
 
-    { Hash::LocationMarker, HashType::Value },
+    { Hash::CaptionData_SaveTypeHash, HashType::Value },
     { Hash::CaptionData_ScreenShot, HashType::Reference }
 };

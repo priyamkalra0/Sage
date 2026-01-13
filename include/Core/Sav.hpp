@@ -6,7 +6,7 @@
 #include <string_view>
 #include <unordered_map>
 #include "Filesystem.hpp"
-#include "MurmurHash.hpp"
+#include "Hash.hpp"
 #include "Types.hpp"
 
 class Sav
@@ -110,7 +110,7 @@ private:
             /* Hashtable ends at MetaData.SaveTypeHash
              * See: https://github.com/marcrobledo/savegame-editors/blob/b65dc1ecf655ba4f5f8bb74d4a7d402fc375fbf1/zelda-totk/zelda-totk.variables.js#L757
              */
-            if (hash == Hash{0xa3db7114}) break;
+            if (hash == Hash::MetaData_SaveTypeHash) break;
             if (!Hashes.count(hash)) continue;
 
             auto const type = Hashes.at(hash);
@@ -118,10 +118,6 @@ private:
                 value_offset = get<u32>(value_offset);
 
             out[hash] = value_offset;
-
-            /* Some offsets need to be manually shifted */
-            /* i.e I do not know a better way to do this */
-            if (hash == Hash::LocationMarker) out[hash] += 0x30;
         }
     };
 
