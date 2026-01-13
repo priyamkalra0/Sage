@@ -132,7 +132,7 @@ private:
              * See: https://github.com/marcrobledo/savegame-editors/blob/b65dc1ecf655ba4f5f8bb74d4a7d402fc375fbf1/zelda-totk/zelda-totk.variables.js#L757
              */
             if (hash == Hash::MetaData_SaveTypeHash) break;
-            if (!Hashes.count(hash)) continue;
+            if (!Hashes.contains(hash)) continue;
 
             auto const type = Hashes.at(hash);
             if (type == HashType::Reference) // value at offset is a reference (pointer)
