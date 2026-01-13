@@ -39,7 +39,7 @@ enum class Hash : u32
     MapData_IconData_StampData_Pos = murmurhash3::hash("MapData.IconData.StampData.Pos"),
     MapData_IconData_StampData_Layer = murmurhash3::hash("MapData.IconData.StampData.Layer"),
 
-    Sequence_CurrentBanc = murmurhash3::hash("Sequence.CurrentBanc"), // string*
+    Sequence_CurrentBanc = murmurhash3::hash("Sequence_CurrentBanc"), // string*
 
     /* caption.sav */
     CaptionData_SaveTypeHash = 0x26f3523b, // unknown
